@@ -78,7 +78,7 @@ public class PlayScreen extends Applet implements KeyListener{
 			for(int c = 0; c < grid[0].length; c++) if(grid[r][c] == null) fullRow = false;
 			if(fullRow){
 				linesCleared++;
-				if(linesCleared%2==0) delay--;
+				if(linesCleared%3==0 && delay>1) delay--;
 				for(int back = r; back > 0; back--) grid[back] = grid[back-1].clone();
 			}
 		}
