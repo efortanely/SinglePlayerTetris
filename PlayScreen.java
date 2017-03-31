@@ -88,24 +88,28 @@ public class PlayScreen extends Applet implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) { 
 		switch(e.getKeyCode()){
+		case KeyEvent.VK_W:
 		case KeyEvent.VK_UP:
 			tetromino.rotate("clockwise");
 			if(tetromino.isOutOfBounds(grid, "any") || tetromino.overlapping(grid)) tetromino.rotate("counterClockwise");
 			break;
+		case KeyEvent.VK_A:
 		case KeyEvent.VK_LEFT:
 			tetromino.move("left");
 			if(tetromino.isOutOfBounds(grid, "left") || tetromino.overlapping(grid)) tetromino.move("right");
 			break;
+		case KeyEvent.VK_D:
 		case KeyEvent.VK_RIGHT: 
 			tetromino.move("right");  
 			if(tetromino.isOutOfBounds(grid, "right") || tetromino.overlapping(grid)) tetromino.move("left");
 			break;
+		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_S:
+			tetromino.legalMoveDown(grid);
+			break;
 		case KeyEvent.VK_SPACE:
 			while(tetromino.legalMoveDown(grid)){ }
 			updateGrid();	
-			break;
-		case KeyEvent.VK_DOWN:
-			tetromino.legalMoveDown(grid);
 			break;
 		default:
 	}
