@@ -42,7 +42,10 @@ public class PlayScreen extends Applet implements KeyListener{
 	}
 	
 	public void loop(Graphics2D g){
-		if(timer%delay==0) if(!tetromino.legalMoveDown(grid)) updateGrid();
+		if(timer%delay==0){
+			if(!tetromino.drop(grid, "oneBlock")) 
+			updateGrid();
+		}
 		
 		g.setColor(bg);
 		g.fillRect(0, 0, getWidth(), getHeight());
@@ -57,7 +60,7 @@ public class PlayScreen extends Applet implements KeyListener{
 			}
 		
 		ghost = tetromino.ghost();
-		while(ghost.legalMoveDown(grid)){ }
+		ghost.drop(grid, "toBottom");
 		
 		ghost.draw(g, true);
 		tetromino.draw(g, false);
@@ -105,10 +108,10 @@ public class PlayScreen extends Applet implements KeyListener{
 			break;
 		case KeyEvent.VK_DOWN:
 		case KeyEvent.VK_S:
-			tetromino.legalMoveDown(grid);
+			tetromino.drop(grid, "oneBlock");
 			break;
 		case KeyEvent.VK_SPACE:
-			while(tetromino.legalMoveDown(grid)){ }
+			tetromino.drop(grid, "toBottom");
 			updateGrid();	
 			break;
 		default:
