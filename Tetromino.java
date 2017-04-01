@@ -192,11 +192,15 @@ public class Tetromino{
 		}
 	}
 	
-	public boolean legalMoveDown(Color[][] grid){
-		move("down");
-		if(isOutOfBounds(grid, "bottom") || overlapping(grid)){
+	public boolean drop(Color[][] grid, String loc){
+		if(loc.equals("oneBlock")){
+			move("down");
+		}if(isOutOfBounds(grid, "bottom") || overlapping(grid)){
 			move("up");
 			return false;
+		}else if(loc.equals("toBottom")){
+			move("down");
+			drop(grid, "toBottom");
 		}
 		return true;
 	}
