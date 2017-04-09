@@ -7,10 +7,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class PlayScreen extends Applet implements KeyListener{
+	//change me for alternate color scheme :)
+	boolean poser = true;
+	
 	int blockWidth = 25, timer, delay = 15, linesCleared;
 	Color[][] grid;
 	Tetromino tetromino, ghost;
-	Color bg = Color.decode("#FFF67C");
+	Color bg = (poser)? Color.decode("#FFF67C") : Color.decode("#170010");
 	
 	@Override
 	public void init(){
@@ -20,7 +23,7 @@ public class PlayScreen extends Applet implements KeyListener{
 	
 	public void newGame() {
 		grid = new Color[getHeight()/blockWidth][getWidth()/blockWidth];
-		Tetromino.initializeGame(getWidth(), blockWidth);
+		Tetromino.initializeGame(getWidth(), blockWidth, poser);
 		tetromino = Tetromino.getNextPiece();
 		linesCleared = 0;
 		delay = 15;
